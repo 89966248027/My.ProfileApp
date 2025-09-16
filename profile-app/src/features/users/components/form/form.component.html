@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="save()" class="user-form">
+  <div class="form-group">
+    <label for="name">Имя</label>
+    <input id="name" type="text" formControlName="name"/>
+    @if (form.controls.name.invalid) {
+      <small class="error">
+        Имя обязательно
+      </small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email"/>
+    @if (form.controls.email.invalid) {
+      <small class="error">
+        Некорректный email
+      </small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="age">Возраст</label>
+    <input id="age" type="number" formControlName="age"/>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Добавить</button>
+  </div>
+</form>

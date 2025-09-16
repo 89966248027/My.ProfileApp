@@ -1,0 +1,42 @@
+<h2 class="title">Пользователи ({{ count() }})</h2>
+<button class="btn btn-primary" (click)="openPopup()">Добавить</button>
+
+@if (data().length > 0) {
+  <table class="user-table">
+    <thead>
+    <tr>
+      <th>Имя</th>
+      <th>Email</th>
+      <th>Возраст</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (user of data(); track user.id) {
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.age || '-' }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="remove(user.id)">Удалить</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p class="empty">Нет данных</p>
+}
+
+<!-- Popup -->
+@if (showPopup()) {
+  <div class="popup-overlay">
+    <div class="popup">
+      <div class="popup-header">
+        <h3>Добавление пользователя</h3>
+        <button class="btn-close" (click)="closePopup()" aria-label="Закрыть"></button>
+      </div>
+      <app-form (closePopup)="closePopup()"></app-form>
+    </div>
+  </div>
+}
